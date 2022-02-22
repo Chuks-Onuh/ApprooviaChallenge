@@ -10,7 +10,6 @@ namespace ApprooviaAssesment.Model
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string Name { get; set; }
-        [Column("E-mail")]
         public string Email { get; set; }
 
         public string Message { get; set; }
