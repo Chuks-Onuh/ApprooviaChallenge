@@ -18,20 +18,23 @@ namespace ApprooviaAssesment.Controllers
         }
 
         [HttpPost("SparkPlugFeedback")]
-        public async Task<IActionResult> Create([FromForm] CustomerDto customer)
+        public async Task<IActionResult> Create([FromForm] CustomerDto model)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ApiResponse.Failed("Could not send feedback. Try again"));   
+                return BadRequest(ApiResponse.Failed("Could not send feedback. Please try again."));   
             }
-            var customerToReturn = new Customer
+
+            var customer = new Customer
             {
-                Name = customer.customerName,
-                Email = customer.customerEmail,
-                Message = customer.customerMessage
+                Name = model.customerName,
+                Email = model.customerEmail,
+                Message = model.customerMessage
             };
-            await _repository.CreateAsync(customerToReturn);
-            return Ok(ApiResponse.Success("Feedback submitted successfully"));
+
+            await _repository.CreateAsync(customer);
+
+            return Ok(ApiResponse.Success("Feedback submitted successfully."));
         }
     }
 }

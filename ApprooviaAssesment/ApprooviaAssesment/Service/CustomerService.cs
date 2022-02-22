@@ -12,12 +12,13 @@ namespace ApprooviaAssesment.Services
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
-            _customers = database.GetCollection<Customer>(settings.SparkPlugCollectionName);
+            _customers = database.GetCollection<Customer>(settings.SparkPlugCollectionName); 
         }
 
         public async Task<Customer> CreateAsync(Customer customer)
         {
             await _customers.InsertOneAsync(customer);
+
             return customer;
         }
     }
